@@ -17,6 +17,8 @@ func PerimeterRectangle(l, w int) float64 {
 
 }
 
-func CubeVolume(a int) int {
-	return a * a * a
+func SphereVolume(radius int) float64 {
+	var v = 4 / 3 * Pi * (float64(radius) * float64(radius) * float64(radius))
+	return v
+
 }
