@@ -16,3 +16,7 @@ func PerimeterRectangle(l, w int) float64 {
 	return r
 
 }
+
+func CubeVolume(a int) int {
+	return a * a * a
+}
