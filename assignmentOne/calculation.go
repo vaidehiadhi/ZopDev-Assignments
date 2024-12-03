@@ -10,3 +10,9 @@ func PerimeterCircle(radius int) float64 {
 func PerimeterSquare(a int) int {
 	return 4 * a
 }
+
+func PerimeterRectangle(l, w int) float64 {
+	var r = (float64(l) + float64(w)) * 2
+	return r
+
+}
