@@ -1,4 +1,4 @@
-package assignmentOne
+package Solutions
 
 const Pi = 3.14
 
@@ -21,4 +21,8 @@ func SphereVolume(radius int) float64 {
 	var v = 4 / 3 * Pi * (float64(radius) * float64(radius) * float64(radius))
 	return v
 
+}
+
+func CubeVolume(a int) int {
+	return a * a * a
 }

@@ -1,4 +1,4 @@
-package assignmentOne
+package Solutions
 
 import "fmt"
 
