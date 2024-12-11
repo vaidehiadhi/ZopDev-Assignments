@@ -1,12 +1,10 @@
 package Solutions
 
-import "fmt"
-
 func Sum(number int) int {
-	var sum int
+	var Result int
 	for i := 0; i <= number; i++ {
-		sum += i
-		fmt.Printf("%d + %d = %d\n", number, i, sum)
+		Result += i
+
 	}
-	return sum
+	return Result
 }
