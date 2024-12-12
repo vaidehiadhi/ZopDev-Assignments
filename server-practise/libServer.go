@@ -32,7 +32,6 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Marshalling the book to JSON before sending it in the response
 	w.Header().Set("Content-Type", "application/json")
 	bookJSON, err := json.Marshal(book)
 	if err != nil {
@@ -50,7 +49,6 @@ func addBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Unmarshal the body into the book object
 	err = json.Unmarshal(b, &book)
 	if err != nil {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
