@@ -54,5 +54,6 @@ func TestCalculator(t *testing.T) {
 		if result != v.expected {
 			t.Errorf("For operation %s with inputs %d and %d, expected %d, got %d", v.operation, v.a, v.b, v.expected, result)
 		}
+
 	}
 }
