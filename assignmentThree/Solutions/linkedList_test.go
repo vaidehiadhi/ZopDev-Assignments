@@ -34,6 +34,7 @@ func TestLinkedList(t *testing.T) {
 				ll.InsertLast(tt.values[i])
 			} else if op == "DeleteLast" {
 				ll.DeleteLast()
+
 			}
 		}
 	}
