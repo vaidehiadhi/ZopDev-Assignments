@@ -43,6 +43,5 @@ func BenchmarkRandInt(b *testing.B) {
 		for _, v1 := range test {
 			Calulator(v1.a, v1.b, v1.op)
 		}
-
 	}
 }

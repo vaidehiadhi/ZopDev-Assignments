@@ -36,7 +36,6 @@ func BenchmarkSum(b *testing.B) {
 			for _, v := range test {
 				Sum(v.input)
 			}
-
 		}
 	}
 }

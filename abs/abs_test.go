@@ -25,7 +25,6 @@ func TestAbs(t *testing.T) {
 		if res != v.expOutput {
 			t.Errorf("Test failed: %s. Input: %d, Expected: %d, Got: %d",
 				v.desp, v.input, v.expOutput, res)
-
 		}
 
 	}

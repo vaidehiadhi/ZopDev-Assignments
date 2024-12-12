@@ -27,7 +27,6 @@ func TestReverse(t *testing.T) {
 				t.Errorf("%s: Mismatch at index %d. Input: %v, Expected: %v, Got: %v",
 					v.desp, i, v.input, v.output, res)
 				break
-
 			}
 		}
 	}

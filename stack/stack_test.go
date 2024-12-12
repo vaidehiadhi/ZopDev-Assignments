@@ -37,7 +37,6 @@ func TestStack(t *testing.T) {
 				val, _ := stack.Pop()
 				result = append(result, val)
 			}
-
 		}
 	}
 }
