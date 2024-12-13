@@ -18,6 +18,7 @@ type Book struct {
 var books = make(map[int]Book)
 var nextID = 1
 
+// Get Request
 func getBook(w http.ResponseWriter, r *http.Request) {
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
@@ -41,6 +42,7 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(bookJSON)
 }
 
+// Post Request
 func addBook(w http.ResponseWriter, r *http.Request) {
 	var book Book
 	b, err := io.ReadAll(r.Body)
@@ -68,6 +70,7 @@ func addBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(bookJSON)
 }
 
+// Put request
 func updateBook(w http.ResponseWriter, r *http.Request) {
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
@@ -114,6 +117,7 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 	w.Write(updatedBookJSON)
 }
 
+// Delete Request
 func deleteBook(w http.ResponseWriter, r *http.Request) {
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
