@@ -15,11 +15,12 @@ type Book struct {
 	Title  string `json:"title"`
 }
 
-var books = make(map[int]Book)
-var nextID = 1
+var Books = make(map[int]Book)
+var NextID = 1
 
 // Get Request
-func getBook(w http.ResponseWriter, r *http.Request) {
+func GetBook(w http.ResponseWriter, r *http.Request) {
+	//idStr := r.PathValue("id")
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil || id <= 0 {
@@ -27,7 +28,7 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	book, exists := books[id]
+	book, exists := Books[id]
 	if !exists {
 		http.Error(w, "Book not found", http.StatusNotFound)
 		return
@@ -43,7 +44,7 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Post Request
-func addBook(w http.ResponseWriter, r *http.Request) {
+func AddBook(w http.ResponseWriter, r *http.Request) {
 	var book Book
 	b, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -57,9 +58,9 @@ func addBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	book.Id = nextID
-	books[nextID] = book
-	nextID++
+	book.Id = NextID
+	Books[NextID] = book
+	NextID++
 
 	w.Header().Set("Content-Type", "application/json")
 	bookJSON, err := json.Marshal(book)
@@ -71,7 +72,8 @@ func addBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Put request
-func updateBook(w http.ResponseWriter, r *http.Request) {
+func UpdateBook(w http.ResponseWriter, r *http.Request) {
+	//idStr := r.PathValue("id")
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil || id <= 0 {
@@ -93,7 +95,7 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	book, exists := books[id]
+	book, exists := Books[id]
 	if !exists {
 		http.Error(w, "Book not found", http.StatusNotFound)
 		return
@@ -106,7 +108,7 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		book.Author = updatedBook.Author
 	}
 
-	books[id] = book
+	Books[id] = book
 
 	w.Header().Set("Content-Type", "application/json")
 	updatedBookJSON, err := json.Marshal(book)
@@ -118,7 +120,8 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Delete Request
-func deleteBook(w http.ResponseWriter, r *http.Request) {
+func DeleteBook(w http.ResponseWriter, r *http.Request) {
+	//idStr := r.PathValue("id")
 	idStr := strings.TrimPrefix(r.URL.Path, "/book/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil || id <= 0 {
@@ -126,13 +129,13 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, exists := books[id]
+	_, exists := Books[id]
 	if !exists {
 		http.Error(w, "Book not found", http.StatusNotFound)
 		return
 	}
 
-	delete(books, id)
+	delete(Books, id)
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(fmt.Sprintf("Book with ID %d deleted", id)))
@@ -142,11 +145,11 @@ func main() {
 	http.HandleFunc("/book/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			getBook(w, r)
+			GetBook(w, r)
 		case http.MethodPut:
-			updateBook(w, r)
+			UpdateBook(w, r)
 		case http.MethodDelete:
-			deleteBook(w, r)
+			DeleteBook(w, r)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -154,7 +157,7 @@ func main() {
 
 	http.HandleFunc("/book", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
-			addBook(w, r)
+			AddBook(w, r)
 		} else {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
