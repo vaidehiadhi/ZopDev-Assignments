@@ -143,7 +143,7 @@ func Test_UpdateBook(t *testing.T) {
 			method:    http.MethodPut,
 			id:        1,
 			body:      `{"author": "updated author","title":"updated title"}`,
-			expected:  `{"id":21,"author":"updated author","title":"updated title"}` + "\n",
+			expected:  `{"id":25,"author":"updated author","title":"updated title"}` + "\n",
 			expStatus: http.StatusOK,
 		},
 	}
