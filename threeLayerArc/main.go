@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/sample")
+	db, err := sql.Open("mysql", "root:password@tcp/sample")
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)
 	}

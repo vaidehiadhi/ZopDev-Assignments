@@ -1,10 +1,10 @@
 package handler
 
-import "net/http"
+import "github.com/vaidehiadhi/threeLayerArc/models"
 
-type UserHandler interface {
-	GetUser(w http.ResponseWriter, r *http.Request)
-	AddUser(w http.ResponseWriter, r *http.Request)
-	UpdateUser(w http.ResponseWriter, r *http.Request)
-	DeleteUser(w http.ResponseWriter, r *http.Request)
+type UserServiceInterface interface {
+	GetUser(name string) (*models.User, error)
+	AddUser(user *models.User) error
+	UpdateUser(name string, user *models.User) error
+	DeleteUser(name string) error
 }

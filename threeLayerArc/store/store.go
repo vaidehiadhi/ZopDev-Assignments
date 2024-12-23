@@ -6,15 +6,15 @@ import (
 	"github.com/vaidehiadhi/threeLayerArc/models"
 )
 
-type Store struct {
+type store struct {
 	db *sql.DB
 }
 
-func NewStore(db *sql.DB) *Store {
-	return &Store{db: db}
+func NewStore(db *sql.DB) *store {
+	return &store{db: db}
 }
 
-func (s *Store) GetUser(name string) (*models.User, error) {
+func (s *store) GetUser(name string) (*models.User, error) {
 	var user models.User
 	err := s.db.QueryRow("SELECT  name, age, phone, email FROM `user` WHERE name = ?", name).
 		Scan(&user.Name, &user.Age, &user.Phone, &user.Email)
@@ -24,19 +24,19 @@ func (s *Store) GetUser(name string) (*models.User, error) {
 	return &user, err
 }
 
-func (s *Store) AddUser(user *models.User) error {
+func (s *store) AddUser(user *models.User) error {
 	_, err := s.db.Exec("INSERT INTO `user` (name, age, phone, email) VALUES (?,?,?,?)",
 		user.Name, user.Age, user.Phone, user.Email)
 	return err
 }
 
-func (s *Store) UpdateUser(name string, user *models.User) error {
+func (s *store) UpdateUser(name string, user *models.User) error {
 	_, err := s.db.Exec("UPDATE `user` SET age= ?, phone = ?, email = ? WHERE name = ?",
 		user.Age, user.Phone, user.Email, user.Name)
 	return err
 }
 
-func (s *Store) DeleteUser(name string) error {
+func (s *store) DeleteUser(name string) error {
 	result, err := s.db.Exec("DELETE FROM `user` WHERE name = ?", name)
 	if err != nil {
 		return err
